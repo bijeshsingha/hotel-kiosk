@@ -17,15 +17,54 @@ export interface StoredGuestRecord {
   signatureDataUrl: string;
 }
 
-// In Vercel serverless functions, process.cwd() is read-only. Use /tmp in Vercel environment.
 const DB_FILE_PATH = process.env.VERCEL
   ? path.join('/tmp', 'registrations_db.json')
   : path.join(process.cwd(), 'registrations_db.json');
 
-// Memory cache fallback for serverless invocation lifecycle
+// Memory store fallback
 let inMemoryStore: StoredGuestRecord[] = [];
 
-function readDb(): StoredGuestRecord[] {
+// Support Vercel KV / Upstash Redis REST API for Serverless Global Persistence
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+const KV_KEY = 'hotel_divine_view_registrations';
+
+async function fetchKvRecords(): Promise<StoredGuestRecord[] | null> {
+  if (!KV_URL || !KV_TOKEN) return null;
+  try {
+    const res = await fetch(`${KV_URL}/get/${KV_KEY}`, {
+      headers: { Authorization: `Bearer ${KV_TOKEN}` },
+      cache: 'no-store',
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data.result) return [];
+    return typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+  } catch (err) {
+    console.error('[KV READ ERROR]', err);
+    return null;
+  }
+}
+
+async function saveKvRecords(records: StoredGuestRecord[]): Promise<boolean> {
+  if (!KV_URL || !KV_TOKEN) return false;
+  try {
+    const res = await fetch(`${KV_URL}/set/${KV_KEY}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(JSON.stringify(records)),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error('[KV WRITE ERROR]', err);
+    return false;
+  }
+}
+
+function readLocalDb(): StoredGuestRecord[] {
   try {
     if (!fs.existsSync(DB_FILE_PATH)) {
       fs.writeFileSync(DB_FILE_PATH, JSON.stringify(inMemoryStore), 'utf-8');
@@ -36,30 +75,40 @@ function readDb(): StoredGuestRecord[] {
     inMemoryStore = parsed;
     return parsed;
   } catch (error) {
-    console.error('[DB READ ERROR]', error);
+    console.error('[LOCAL DB READ ERROR]', error);
     return inMemoryStore;
   }
 }
 
-function writeDb(records: StoredGuestRecord[]): void {
+function writeLocalDb(records: StoredGuestRecord[]): void {
   try {
     inMemoryStore = records;
     fs.writeFileSync(DB_FILE_PATH, JSON.stringify(records, null, 2), 'utf-8');
   } catch (error) {
-    console.error('[DB WRITE ERROR]', error);
+    console.error('[LOCAL DB WRITE ERROR]', error);
   }
 }
 
-// 1. Save new guest intake to local database first
-export function saveLocalRegistration(payload: {
+export async function getAllRegistrations(): Promise<StoredGuestRecord[]> {
+  const kvRecords = await fetchKvRecords();
+  if (kvRecords !== null) return kvRecords;
+  return readLocalDb();
+}
+
+export async function getRegistrationById(registrationId: string): Promise<StoredGuestRecord | null> {
+  const records = await getAllRegistrations();
+  return records.find((r) => r.registrationId === registrationId) || null;
+}
+
+export async function saveLocalRegistration(payload: {
   registrationId: string;
   primaryGuest: any;
   coGuests: any[];
   foreignerDetails: any;
   termsAccepted: boolean;
   signatureDataUrl: string;
-}): StoredGuestRecord {
-  const records = readDb();
+}): Promise<StoredGuestRecord> {
+  const records = await getAllRegistrations();
   const timestamp = new Date().toISOString();
 
   const newRecord: StoredGuestRecord = {
@@ -77,18 +126,19 @@ export function saveLocalRegistration(payload: {
   };
 
   records.unshift(newRecord);
-  writeDb(records);
+  await saveKvRecords(records);
+  writeLocalDb(records);
+
   return newRecord;
 }
 
-// 2. Update PMS sync status after API attempt
-export function updateSyncStatus(
+export async function updateSyncStatus(
   registrationId: string,
   status: 'synced' | 'failed',
   pmsResponse?: any,
   syncError?: string
-): StoredGuestRecord | null {
-  const records = readDb();
+): Promise<StoredGuestRecord | null> {
+  const records = await getAllRegistrations();
   const index = records.findIndex((r) => r.registrationId === registrationId);
   if (index === -1) return null;
 
@@ -98,13 +148,14 @@ export function updateSyncStatus(
   if (syncError) records[index].syncError = syncError;
   if (status === 'failed') records[index].retryCount += 1;
 
-  writeDb(records);
+  await saveKvRecords(records);
+  writeLocalDb(records);
+
   return records[index];
 }
 
-// 3. Assign or update Room Number by Front Desk Staff
-export function updateRoomNumber(registrationId: string, roomNumber: string): StoredGuestRecord | null {
-  const records = readDb();
+export async function updateRoomNumber(registrationId: string, roomNumber: string): Promise<StoredGuestRecord | null> {
+  const records = await getAllRegistrations();
   const index = records.findIndex((r) => r.registrationId === registrationId);
   if (index === -1) return null;
 
@@ -114,17 +165,8 @@ export function updateRoomNumber(registrationId: string, roomNumber: string): St
   }
   records[index].updatedAt = new Date().toISOString();
 
-  writeDb(records);
+  await saveKvRecords(records);
+  writeLocalDb(records);
+
   return records[index];
-}
-
-// 4. Get all stored registrations for Front Desk
-export function getAllRegistrations(): StoredGuestRecord[] {
-  return readDb();
-}
-
-// 5. Get registration by ID
-export function getRegistrationById(registrationId: string): StoredGuestRecord | null {
-  const records = readDb();
-  return records.find((r) => r.registrationId === registrationId) || null;
 }

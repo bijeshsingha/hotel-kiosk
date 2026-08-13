@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized staff access' }, { status: 401 });
   }
 
-  const registrations = getAllRegistrations();
+  const registrations = await getAllRegistrations();
   return NextResponse.json({
     success: true,
     total: registrations.length,
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     const { action, registrationId, roomNumber } = body;
 
     if (action === 'retry' && registrationId) {
-      const record = getRegistrationById(registrationId);
+      const record = await getRegistrationById(registrationId);
       if (!record) {
         return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
       }
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       console.log(`[PMS RETRY TRIGGERED] Staff retrying PMS sync for ${registrationId}...`);
 
       const pmsResponseData = { pmsAckId: `PMS-ACK-RETRY-${Date.now()}`, status: 'RECEIVED' };
-      const updatedRecord = updateSyncStatus(registrationId, 'synced', pmsResponseData);
+      const updatedRecord = await updateSyncStatus(registrationId, 'synced', pmsResponseData);
 
       return NextResponse.json({
         success: true,
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (action === 'updateRoomNumber' && registrationId) {
-      const updatedRecord = updateRoomNumber(registrationId, roomNumber || '');
+      const updatedRecord = await updateRoomNumber(registrationId, roomNumber || '');
       if (!updatedRecord) {
         return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
       }

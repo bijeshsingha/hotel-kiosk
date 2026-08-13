@@ -24,8 +24,8 @@ export async function POST(request: NextRequest) {
       .substring(2, 6)
       .toUpperCase()}`;
 
-    // 2. STEP 1: Save to local persistent database FIRST (status: "pending")
-    const localRecord = saveLocalRegistration({
+    // 2. STEP 1: Save to persistent database FIRST (status: "pending")
+    const localRecord = await saveLocalRegistration({
       registrationId,
       primaryGuest: data.primaryGuest,
       coGuests: data.coGuests,
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     });
 
     console.log('\n=======================================================');
-    console.log(` [LOCAL DB SAVED] Guest intake stored locally: ${registrationId}`);
+    console.log(` [LOCAL DB SAVED] Guest intake stored: ${registrationId}`);
     console.log(` Primary Guest: ${data.primaryGuest.fullName} (${data.primaryGuest.nationality})`);
     console.log(` Mobile Number: ${data.primaryGuest.contact.mobileNumber}`);
     console.log('=======================================================\n');
@@ -56,11 +56,11 @@ export async function POST(request: NextRequest) {
       syncErrorMessage = err?.message || 'PMS API Connection Timeout / Maintenance';
     }
 
-    // 4. STEP 3: Update local DB sync status
+    // 4. STEP 3: Update database sync status
     if (pmsSyncSuccess) {
-      updateSyncStatus(registrationId, 'synced', pmsResponseData);
+      await updateSyncStatus(registrationId, 'synced', pmsResponseData);
     } else {
-      updateSyncStatus(registrationId, 'failed', null, syncErrorMessage);
+      await updateSyncStatus(registrationId, 'failed', null, syncErrorMessage);
     }
 
     // 5. STEP 4: Return confirmation to Kiosk (Guest data is safely saved!)
