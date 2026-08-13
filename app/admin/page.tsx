@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import GuestDetailModal from '@/components/GuestDetailModal';
@@ -214,73 +214,117 @@ export default function AdminDashboardPage() {
         </Card>
       </div>
 
-      {/* Customer Referral Source Breakdown Card */}
-      <Card className="mb-8 bg-slate-900 text-white border-slate-800 shadow-xl">
-        <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-800">
-          <PieChart className="w-5 h-5 text-secondary" />
-          <h3 className="text-base font-bold font-heading text-white">How Guests Found Us (Referral Breakdown)</h3>
-        </div>
+      {/* How Guests Found Us (Referral Breakdown Card) */}
+      <Card className="mb-8 border border-gray-200 shadow-md">
+        <CardHeader className="border-b border-gray-100 pb-3 mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-primary/10 rounded-lg text-primary flex-shrink-0">
+              <PieChart className="w-5 h-5" />
+            </div>
+            <div>
+              <CardTitle>How Guests Found Us</CardTitle>
+              <CardDescription>Referral source analytics & channel breakdown</CardDescription>
+            </div>
+          </div>
+
+          {selectedChannelFilter !== 'all' && (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setSelectedChannelFilter('all')}
+              className="text-xs text-secondary border-secondary/30 hover:bg-secondary/10 mt-2 sm:mt-0"
+            >
+              Show All Channels ({registrations.length})
+            </Button>
+          )}
+        </CardHeader>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          {/* Cab / Auto Drivers */}
           <div
-            onClick={() => setSelectedChannelFilter(selectedChannelFilter === 'Cab / Auto / Rickshaw Driver' ? 'all' : 'Cab / Auto / Rickshaw Driver')}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${
+            onClick={() =>
+              setSelectedChannelFilter(
+                selectedChannelFilter === 'Cab / Auto / Rickshaw Driver' ? 'all' : 'Cab / Auto / Rickshaw Driver'
+              )
+            }
+            className={`p-3.5 rounded-lg border cursor-pointer transition-all duration-200 ${
               selectedChannelFilter === 'Cab / Auto / Rickshaw Driver'
-                ? 'bg-amber-500/20 border-amber-400 ring-2 ring-amber-400/30'
-                : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'
+                ? 'bg-amber-100 border-amber-500 ring-2 ring-amber-500/20 shadow-sm'
+                : 'bg-amber-50/50 border-amber-200/80 hover:border-amber-400 hover:bg-amber-50'
             }`}
           >
-            <span className="text-amber-400 font-semibold block uppercase tracking-wider text-[10px]">🚖 Cab / Auto Drivers</span>
-            <span className="text-xl font-extrabold font-heading text-white">{channelBreakdown['Cab / Auto / Rickshaw Driver'] || 0}</span>
+            <span className="text-amber-900 font-bold block uppercase tracking-wider text-[10px] sm:text-[11px] truncate">
+              🚖 Cab / Auto Drivers
+            </span>
+            <span className="text-2xl font-extrabold font-heading text-amber-950 mt-1 block">
+              {channelBreakdown['Cab / Auto / Rickshaw Driver'] || 0}
+            </span>
           </div>
 
+          {/* Google Search / Maps */}
           <div
-            onClick={() => setSelectedChannelFilter(selectedChannelFilter === 'Google Search / Maps' ? 'all' : 'Google Search / Maps')}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${
+            onClick={() =>
+              setSelectedChannelFilter(
+                selectedChannelFilter === 'Google Search / Maps' ? 'all' : 'Google Search / Maps'
+              )
+            }
+            className={`p-3.5 rounded-lg border cursor-pointer transition-all duration-200 ${
               selectedChannelFilter === 'Google Search / Maps'
-                ? 'bg-blue-500/20 border-blue-400 ring-2 ring-blue-400/30'
-                : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'
+                ? 'bg-blue-100 border-blue-500 ring-2 ring-blue-500/20 shadow-sm'
+                : 'bg-blue-50/50 border-blue-200/80 hover:border-blue-400 hover:bg-blue-50'
             }`}
           >
-            <span className="text-blue-400 font-semibold block uppercase tracking-wider text-[10px]">🔍 Google Search / Maps</span>
-            <span className="text-xl font-extrabold font-heading text-white">{channelBreakdown['Google Search / Maps'] || 0}</span>
+            <span className="text-blue-900 font-bold block uppercase tracking-wider text-[10px] sm:text-[11px] truncate">
+              🔍 Google Search / Maps
+            </span>
+            <span className="text-2xl font-extrabold font-heading text-blue-950 mt-1 block">
+              {channelBreakdown['Google Search / Maps'] || 0}
+            </span>
           </div>
 
+          {/* Recommendation / Word of Mouth */}
           <div
-            onClick={() => setSelectedChannelFilter(selectedChannelFilter === 'Recommendation / Word of Mouth' ? 'all' : 'Recommendation / Word of Mouth')}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${
+            onClick={() =>
+              setSelectedChannelFilter(
+                selectedChannelFilter === 'Recommendation / Word of Mouth' ? 'all' : 'Recommendation / Word of Mouth'
+              )
+            }
+            className={`p-3.5 rounded-lg border cursor-pointer transition-all duration-200 ${
               selectedChannelFilter === 'Recommendation / Word of Mouth'
-                ? 'bg-purple-500/20 border-purple-400 ring-2 ring-purple-400/30'
-                : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'
+                ? 'bg-purple-100 border-purple-500 ring-2 ring-purple-500/20 shadow-sm'
+                : 'bg-purple-50/50 border-purple-200/80 hover:border-purple-400 hover:bg-purple-50'
             }`}
           >
-            <span className="text-purple-300 font-semibold block uppercase tracking-wider text-[10px]">🤝 Word of Mouth</span>
-            <span className="text-xl font-extrabold font-heading text-white">{channelBreakdown['Recommendation / Word of Mouth'] || 0}</span>
+            <span className="text-purple-900 font-bold block uppercase tracking-wider text-[10px] sm:text-[11px] truncate">
+              🤝 Word of Mouth
+            </span>
+            <span className="text-2xl font-extrabold font-heading text-purple-950 mt-1 block">
+              {channelBreakdown['Recommendation / Word of Mouth'] || 0}
+            </span>
           </div>
 
+          {/* Hotel Booking Website (OTA) */}
           <div
-            onClick={() => setSelectedChannelFilter(selectedChannelFilter === 'Hotel Booking Website (OTA)' ? 'all' : 'Hotel Booking Website (OTA)')}
-            className={`p-3 rounded-lg border cursor-pointer transition-all ${
+            onClick={() =>
+              setSelectedChannelFilter(
+                selectedChannelFilter === 'Hotel Booking Website (OTA)' ? 'all' : 'Hotel Booking Website (OTA)'
+              )
+            }
+            className={`p-3.5 rounded-lg border cursor-pointer transition-all duration-200 ${
               selectedChannelFilter === 'Hotel Booking Website (OTA)'
-                ? 'bg-emerald-500/20 border-emerald-400 ring-2 ring-emerald-400/30'
-                : 'bg-slate-800/60 border-slate-700 hover:border-slate-500'
+                ? 'bg-emerald-100 border-emerald-500 ring-2 ring-emerald-500/20 shadow-sm'
+                : 'bg-emerald-50/50 border-emerald-200/80 hover:border-emerald-400 hover:bg-emerald-50'
             }`}
           >
-            <span className="text-emerald-400 font-semibold block uppercase tracking-wider text-[10px]">🏨 OTA / Booking Site</span>
-            <span className="text-xl font-extrabold font-heading text-white">{channelBreakdown['Hotel Booking Website (OTA)'] || 0}</span>
+            <span className="text-emerald-900 font-bold block uppercase tracking-wider text-[10px] sm:text-[11px] truncate">
+              🏨 OTA / Booking Site
+            </span>
+            <span className="text-2xl font-extrabold font-heading text-emerald-950 mt-1 block">
+              {channelBreakdown['Hotel Booking Website (OTA)'] || 0}
+            </span>
           </div>
         </div>
-
-        {selectedChannelFilter !== 'all' && (
-          <div className="mt-3 text-right">
-            <button
-              onClick={() => setSelectedChannelFilter('all')}
-              className="text-xs text-secondary underline hover:text-white transition-colors"
-            >
-              Clear Channel Filter (Showing "{selectedChannelFilter}")
-            </button>
-          </div>
-        )}
       </Card>
 
       {/* Search & Filter Controls */}
