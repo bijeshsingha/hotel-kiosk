@@ -159,6 +159,7 @@ export default function AdminDashboardPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
+      <div className="no-print">
       {/* Top Admin Header */}
       <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 bg-surface border border-gray-200 p-6 rounded-xl shadow-md">
         <div>
@@ -493,6 +494,8 @@ export default function AdminDashboardPage() {
           })}
         </div>
       )}
+
+      </div>
 
       {/* Guest Full Detail & Print Modal */}
       {selectedRecord && (
