@@ -39,7 +39,12 @@ async function fetchKvRecords(): Promise<StoredGuestRecord[] | null> {
     if (!res.ok) return null;
     const data = await res.json();
     if (!data.result) return [];
-    return typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+    let parsed = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+    // Handle legacy double-stringified data gracefully
+    if (typeof parsed === 'string') {
+      parsed = JSON.parse(parsed);
+    }
+    return Array.isArray(parsed) ? parsed : [];
   } catch (err) {
     console.error('[KV READ ERROR]', err);
     return null;
@@ -55,7 +60,7 @@ async function saveKvRecords(records: StoredGuestRecord[]): Promise<boolean> {
         Authorization: `Bearer ${KV_TOKEN}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(JSON.stringify(records)),
+      body: JSON.stringify(records),
     });
     return res.ok;
   } catch (err) {
