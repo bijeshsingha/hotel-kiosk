@@ -15,6 +15,8 @@ export interface StoredGuestRecord {
   foreignerDetails: any;
   termsAccepted: boolean;
   signatureDataUrl: string;
+  checkoutTime?: string;
+  extraItems?: string;
 }
 
 const DB_FILE_PATH = process.env.VERCEL
@@ -168,6 +170,25 @@ export async function updateRoomNumber(registrationId: string, roomNumber: strin
   if (records[index].primaryGuest) {
     records[index].primaryGuest.roomNumber = roomNumber;
   }
+  records[index].updatedAt = new Date().toISOString();
+
+  await saveKvRecords(records);
+  writeLocalDb(records);
+
+  return records[index];
+}
+
+export async function updateCheckoutDetails(
+  registrationId: string,
+  checkoutTime: string,
+  extraItems: string
+): Promise<any | null> {
+  const records = await getAllRegistrations();
+  const index = records.findIndex((r) => r.registrationId === registrationId);
+  if (index === -1) return null;
+
+  records[index].checkoutTime = checkoutTime;
+  records[index].extraItems = extraItems;
   records[index].updatedAt = new Date().toISOString();
 
   await saveKvRecords(records);

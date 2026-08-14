@@ -153,7 +153,7 @@ export default function AdminDashboardPage() {
       alert("No data to export");
       return;
     }
-    const headers = ["Registration ID", "Date", "Time", "Full Name", "Mobile", "Nationality", "Room Number", "Status", "Total Co-Guests"];
+    const headers = ["Registration ID", "Date", "Time", "Full Name", "Mobile", "Nationality", "Room Number", "Status", "Total Co-Guests", "Checkout Time", "Extra Items"];
     const rows = registrations.map(reg => {
       const g = reg.primaryGuest || { contact: {} };
       const d = new Date(reg.createdAt);
@@ -166,7 +166,9 @@ export default function AdminDashboardPage() {
         g.nationality || '',
         reg.roomNumber || '',
         reg.syncStatus || '',
-        reg.coGuests ? reg.coGuests.length : 0
+        reg.coGuests ? reg.coGuests.length : 0,
+        reg.checkoutTime ? new Date(reg.checkoutTime).toLocaleString() : '',
+        `"${reg.extraItems ? reg.extraItems.replace(/"/g, '""') : ''}"`
       ].join(",");
     });
     const csvContent = [headers.join(","), ...rows].join("\n");

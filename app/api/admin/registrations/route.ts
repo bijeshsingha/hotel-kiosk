@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllRegistrations, getRegistrationById, updateSyncStatus, updateRoomNumber } from '@/lib/db';
+import { getAllRegistrations, getRegistrationById, updateSyncStatus, updateRoomNumber, updateCheckoutDetails } from '@/lib/db';
 import { isAuthenticated } from '@/lib/auth';
 
 export async function GET() {
@@ -40,6 +40,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         message: `PMS Sync successfully retried for ${registrationId}`,
+        record: updatedRecord,
+      });
+    }
+
+
+    if (action === 'updateCheckout' && registrationId) {
+      const { checkoutTime, extraItems } = body;
+      const updatedRecord = await updateCheckoutDetails(registrationId, checkoutTime || '', extraItems || '');
+      if (!updatedRecord) {
+        return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
+      }
+
+      console.log(`[CHECKOUT INFO UPDATED] Staff updated checkout info for ${registrationId}`);
+
+      return NextResponse.json({
+        success: true,
+        message: `Checkout information saved for ${registrationId}`,
         record: updatedRecord,
       });
     }
