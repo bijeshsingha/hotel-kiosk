@@ -6,7 +6,7 @@ export interface StoredGuestRecord {
   createdAt: string;
   updatedAt: string;
   roomNumber?: string;
-  syncStatus: 'synced' | 'pending' | 'failed' | 'archived_anonymized';
+  syncStatus: 'synced' | 'pending' | 'failed' | 'archived_anonymized' | 'archived';
   pmsResponse?: any;
   syncError?: string;
   retryCount: number;
@@ -217,17 +217,11 @@ export async function anonymizeRegistration(registrationId: string): Promise<boo
   const index = records.findIndex(r => r.registrationId === registrationId);
   if (index === -1) return false;
 
-  // Anonymize sensitive fields
-  records[index].signatureDataUrl = '';
-  records[index].idImageUrl = '';
+  // We are NO LONGER deleting signatures/IDs or anonymizing contact details
+  // so the hotel can submit this data to the police records (Form-C, etc).
+  // The background cron job will handle full deletion after 1 year.
   
-  // Optionally anonymize primary contact (leaving just name/nationality for ledger)
-  if (records[index].primaryGuest?.contact) {
-    records[index].primaryGuest.contact.mobileNumber = '[REDACTED]';
-    records[index].primaryGuest.contact.email = '[REDACTED]';
-  }
-  
-  records[index].syncStatus = 'archived_anonymized';
+  records[index].syncStatus = 'archived';
   records[index].updatedAt = new Date().toISOString();
 
   await saveKvRecords(records);
