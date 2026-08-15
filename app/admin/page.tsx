@@ -209,6 +209,7 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto flex-wrap">
+          <Link href="/admin/orders" className="bg-amber-100 text-amber-800 px-4 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-amber-200 transition-colors shadow-sm text-sm"><UtensilsCrossed className="w-4 h-4"/> Kitchen Display</Link>
           <Button type="button" variant="outline" size="sm" onClick={handleExportCSV} className="bg-white">
             <Download className="w-4 h-4 mr-1.5 text-gray-700" /> Export CSV
           </Button>
