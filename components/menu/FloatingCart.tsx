@@ -98,7 +98,7 @@ export function FloatingCart() {
                   <div key={item.id} className="flex justify-between items-center py-4 border-b border-gray-100 last:border-0">
                     <div className="flex-1">
                       <h4 className="font-semibold text-gray-900">{item.name}</h4>
-                      <p className="text-gray-500 font-mono text-sm">?{item.price}</p>
+                      <p className="text-gray-500 font-mono text-sm">₹{item.price}</p>
                     </div>
                     <div className="flex items-center gap-4 bg-gray-50 rounded-xl px-2 py-1">
                       <button onClick={() => updateQuantity(item.id, -1)} className="p-1 text-gray-600 active:scale-90"><Minus className="w-4 h-4"/></button>
@@ -112,7 +112,7 @@ export function FloatingCart() {
               <div className="border-t border-gray-100 pt-4 mb-6 flex-shrink-0">
                 <div className="flex justify-between items-center font-bold text-lg text-gray-900">
                   <span>Total</span>
-                  <span className="font-mono">?{totalPrice}</span>
+                  <span className="font-mono">₹{totalPrice}</span>
                 </div>
               </div>
 
@@ -120,7 +120,7 @@ export function FloatingCart() {
                 className="w-full bg-gray-900 text-white font-bold py-4 rounded-2xl active:scale-[0.98] transition-transform flex-shrink-0"
                 onClick={() => setIsCheckingOut(true)}
               >
-                Checkout (?{totalPrice})
+                Checkout (₹{totalPrice})
               </button>
             </>
           ) : (
@@ -181,7 +181,7 @@ export function FloatingCart() {
               <span className="font-semibold">View Cart</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-mono font-bold">?{totalPrice}</span>
+              <span className="font-mono font-bold">₹{totalPrice}</span>
               <ChevronUp className="w-5 h-5 opacity-70" />
             </div>
           </button>

@@ -59,7 +59,7 @@ export function MenuItemCard({ item }: MenuItemProps) {
           </div>
           <h3 className="font-semibold text-gray-900 leading-tight">{item.name}</h3>
         </div>
-        <p className="text-sm font-medium text-gray-600 font-mono">?{item.price}</p>
+        <p className="text-sm font-medium text-gray-600 font-mono">₹{item.price}</p>
         
         {!isAvailable && (
           <p className="text-[10px] sm:text-xs text-red-500 font-semibold mt-1.5 bg-red-50 inline-block px-2 py-0.5 rounded-md border border-red-100">

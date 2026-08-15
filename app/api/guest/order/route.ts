@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Compile order string
     const itemStrings = items.map(item => `${item.quantity}x ${item.name}`);
-    const chargeString = `In-Room Dining: ${itemStrings.join(', ')} - ?${totalPrice}`;
+    const chargeString = `In-Room Dining: ${itemStrings.join(', ')} - ₹${totalPrice}`;
 
     // 3. Send to PMS (Simulated)
     let pmsResponseData;

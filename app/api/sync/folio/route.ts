@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const chargeString = `${quantity}x ${itemName} - ?${amount * quantity}`;
+    const chargeString = `${quantity}x ${itemName} - ₹${amount * quantity}`;
     
     // Simulate PMS Folio Posting
     let pmsResponseData;
