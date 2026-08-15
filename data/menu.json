@@ -1,0 +1,665 @@
+{
+  "Breakfast": [
+    {
+      "id": "item-0",
+      "name": "Bread Toast",
+      "price": 50,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-1",
+      "name": "Plain Bread with Butter / Jam",
+      "price": 50,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-2",
+      "name": "Bread Omelet",
+      "price": 80,
+      "dietary": "Non-Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-3",
+      "name": "French Toast",
+      "price": 110,
+      "dietary": "Non-Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-4",
+      "name": "3pc Puri Sabji",
+      "price": 80,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-5",
+      "name": "2pc Roti Sabji",
+      "price": 80,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-6",
+      "name": "2pc Plain Paratha with Sabjee",
+      "price": 100,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-7",
+      "name": "Chole Bhatore",
+      "price": 90,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-8",
+      "name": "Tawa Roti",
+      "price": 20,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-9",
+      "name": "Butter Roti",
+      "price": 30,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-10",
+      "name": "Plain Paratha (1Pc)",
+      "price": 40,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-11",
+      "name": "Aloo Paratha (1Pc)",
+      "price": 70,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-12",
+      "name": "Onion Paratha (1Pc)",
+      "price": 70,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-13",
+      "name": "Paneer Paratha (1Pc)",
+      "price": 120,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-14",
+      "name": "Extra Sabji",
+      "price": 60,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-15",
+      "name": "Milk Tea",
+      "price": 40,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-16",
+      "name": "Black Tea",
+      "price": 30,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-17",
+      "name": "Black Coffee",
+      "price": 50,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-18",
+      "name": "Milk Coffee",
+      "price": 60,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-19",
+      "name": "Hot Milk",
+      "price": 80,
+      "dietary": "Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-20",
+      "name": "Boil Egg (2 Pcs)",
+      "price": 50,
+      "dietary": "Non-Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-21",
+      "name": "Masala/Plain Omelette",
+      "price": 70,
+      "dietary": "Non-Veg",
+      "time": "8:00 AM - 11:00 AM"
+    },
+    {
+      "id": "item-22",
+      "name": "Egg Bhurji",
+      "price": 120,
+      "dietary": "Non-Veg",
+      "time": "8:00 AM - 11:00 AM"
+    }
+  ],
+  "Snacks": [
+    {
+      "id": "item-23",
+      "name": "French Fries",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-24",
+      "name": "Peanut Masala",
+      "price": 120,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-25",
+      "name": "Vegetable Pakoda",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-26",
+      "name": "Onion Ring Pakoda",
+      "price": 160,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-27",
+      "name": "Egg Pakoda (6Pc)",
+      "price": 180,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-28",
+      "name": "Paneer Pakoda",
+      "price": 220,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-29",
+      "name": "Chicken Pakoda",
+      "price": 220,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    }
+  ],
+  "Chinese": [
+    {
+      "id": "item-30",
+      "name": "American Corn Salt Pepper",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-31",
+      "name": "Crispy Chilly Baby Corn",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-32",
+      "name": "Chilly Paneer (Dry/Gravy)",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-33",
+      "name": "Veg. Manchurian (Dry/Gravy) 8Pc",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-34",
+      "name": "Crispy Chicken Dry",
+      "price": 300,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-35",
+      "name": "Chilly Chicken (Dry/Gravy) 8Pc",
+      "price": 250,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-36",
+      "name": "Chicken 65 Dry",
+      "price": 250,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-37",
+      "name": "Chicken Manchurian (Dry/Gravy) 8Pc",
+      "price": 250,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-38",
+      "name": "Chicken in Hot Garlic Sauce (Dry/Gravy) 8Pc",
+      "price": 250,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-39",
+      "name": "Garlic Chicken (Gravy) 8Pc",
+      "price": 250,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-40",
+      "name": "Veg Hakka Noodles",
+      "price": 180,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-41",
+      "name": "Egg Hakka Noodles",
+      "price": 180,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-42",
+      "name": "Chicken Hakka Noodles",
+      "price": 200,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-43",
+      "name": "Vegetable Fried Rice",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-44",
+      "name": "Egg Fried Rice",
+      "price": 180,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-45",
+      "name": "Chicken Fried Rice",
+      "price": 200,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-46",
+      "name": "Vegetable Gravy Noodles",
+      "price": 200,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-47",
+      "name": "Chicken Gravy Noodles",
+      "price": 230,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    }
+  ],
+  "Sides": [
+    {
+      "id": "item-48",
+      "name": "Papad Bhurji",
+      "price": 80,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-49",
+      "name": "Roasted / Fry Papad (2Pc)",
+      "price": 50,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-50",
+      "name": "Green Salad",
+      "price": 100,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-51",
+      "name": "Kuchumber Salad",
+      "price": 100,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-52",
+      "name": "Onion Salad",
+      "price": 100,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-53",
+      "name": "Plain Raita",
+      "price": 70,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-54",
+      "name": "Mix Raita",
+      "price": 90,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    }
+  ],
+  "Main Course": [
+    {
+      "id": "item-55",
+      "name": "Chicken Butter Masala",
+      "price": 290,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-56",
+      "name": "Chicken Bharta",
+      "price": 280,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-57",
+      "name": "Kadai Chicken",
+      "price": 280,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-58",
+      "name": "Chicken Masala",
+      "price": 230,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-59",
+      "name": "Chicken Curry",
+      "price": 230,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-60",
+      "name": "Chicken Rogan",
+      "price": 230,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-61",
+      "name": "Mutton Do Pyaza",
+      "price": 390,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-62",
+      "name": "Mutton Curry",
+      "price": 350,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-63",
+      "name": "Mutton Kosha",
+      "price": 350,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-64",
+      "name": "Fish Fry (2Pcs)",
+      "price": 180,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-65",
+      "name": "Fish Masala (2Pcs)",
+      "price": 200,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-66",
+      "name": "Fish Curry (2Pcs)",
+      "price": 200,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-67",
+      "name": "Fish Tenga (2Pcs)",
+      "price": 200,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-68",
+      "name": "Fish Sarso (2Pcs)",
+      "price": 200,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-69",
+      "name": "Egg Curry (2Pcs)",
+      "price": 120,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-70",
+      "name": "Egg Masala",
+      "price": 130,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-71",
+      "name": "Egg Kosha",
+      "price": 130,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-72",
+      "name": "Aloo Dum",
+      "price": 170,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-73",
+      "name": "Aloo Matar",
+      "price": 130,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-74",
+      "name": "Boil Vegetable",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-75",
+      "name": "Aloo Jeera",
+      "price": 90,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-76",
+      "name": "Aloo Bhaji",
+      "price": 80,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-77",
+      "name": "Aloo Pitika",
+      "price": 80,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-78",
+      "name": "Paneer Butter Masala",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-79",
+      "name": "Paneer Do Pyaza",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-80",
+      "name": "Kadai Paneer",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-81",
+      "name": "Palak Paneer (Seasonal)",
+      "price": 250,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-82",
+      "name": "Paneer Makma",
+      "price": 300,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-83",
+      "name": "Plain Dal",
+      "price": 120,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-84",
+      "name": "Pili Dal Fry",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-85",
+      "name": "Pili Dal Tadka",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    }
+  ],
+  "Rice & Biryani": [
+    {
+      "id": "item-86",
+      "name": "Steam Rice (Regular)",
+      "price": 90,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-87",
+      "name": "Steam Rice (Basmati)",
+      "price": 150,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-88",
+      "name": "Jeera Rice",
+      "price": 180,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-89",
+      "name": "Plain Khichdi",
+      "price": 180,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-90",
+      "name": "Vegetable Pulao",
+      "price": 200,
+      "dietary": "Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-91",
+      "name": "Chicken Biryani",
+      "price": 250,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    },
+    {
+      "id": "item-92",
+      "name": "Chicken Pulao",
+      "price": 220,
+      "dietary": "Non-Veg",
+      "time": "12:00 NOON - 10:45 PM"
+    }
+  ]
+}
