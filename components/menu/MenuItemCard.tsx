@@ -18,7 +18,7 @@ export function MenuItemCard({ item }: MenuItemProps) {
 
     const checkAvailability = () => {
       try {
-        const [startStr, endStr] = item.time.split('-').map(s => s.trim());
+        const [startStr, endStr] = item.time!.split('-').map(s => s.trim());
         if (!startStr || !endStr) return;
 
         const parseTime = (timeStr: string) => {
