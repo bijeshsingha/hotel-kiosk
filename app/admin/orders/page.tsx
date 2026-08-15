@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { OrderRecord } from '@/lib/ordersDb';
+import type { OrderRecord } from '@/lib/ordersDb';
 import { ChefHat, Printer, CheckCircle2, Clock, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
 
