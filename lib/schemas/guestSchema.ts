@@ -81,6 +81,7 @@ export const guestRegistrationSchema = z
       message: 'You must accept hotel terms and conditions',
     }),
     signatureDataUrl: z.string().min(10, 'Digital signature is required'),
+  idImageUrl: z.string().optional().default(''),
   })
   .superRefine((data, ctx) => {
     const isForeigner = (data.primaryGuest.nationality || '').trim().toLowerCase() !== 'indian';
