@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { addFolioCharge } from '@/lib/db';
 import { isAuthenticated } from '@/lib/auth';
+import { MockPMSService } from '@/lib/pms-mock';
 
 export async function POST(request: NextRequest) {
   const authenticated = await isAuthenticated();
@@ -18,6 +19,19 @@ export async function POST(request: NextRequest) {
 
     const chargeString = `${quantity}x ${itemName} - ?${amount * quantity}`;
     
+    // Simulate PMS Folio Posting
+    let pmsResponseData;
+    try {
+      pmsResponseData = await MockPMSService.postRoomCharge(roomNumber, body);
+    } catch (err: any) {
+      console.error('[PMS CHARGE ERROR]', err);
+      return NextResponse.json(
+        { error: 'PMS API Connection Timeout / Maintenance. Charge not posted.' },
+        { status: 503 }
+      );
+    }
+
+    // On PMS success, append to local ledger
     const updatedRecord = await addFolioCharge(roomNumber, chargeString);
 
     if (!updatedRecord) {
@@ -30,6 +44,7 @@ export async function POST(request: NextRequest) {
       success: true,
       message: `Charge posted to Room ${roomNumber} successfully`,
       chargeString,
+      pmsTransaction: pmsResponseData,
     });
   } catch (error) {
     console.error('[POS CHARGE ERROR]', error);

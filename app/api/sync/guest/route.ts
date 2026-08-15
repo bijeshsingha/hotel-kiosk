@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { guestRegistrationSchema } from '@/lib/schemas/guestSchema';
 import { saveLocalRegistration, updateSyncStatus } from '@/lib/db';
+import { MockPMSService } from '@/lib/pms-mock';
 
 export async function POST(request: NextRequest) {
   try {
@@ -47,10 +48,9 @@ export async function POST(request: NextRequest) {
     let syncErrorMessage = '';
 
     try {
-      // In production: await fetch(process.env.PMS_API_URL!, { method: 'POST', body: JSON.stringify(data) });
-      // Simulate PMS gateway push
+      // Use Mock PMS Service
+      pmsResponseData = await MockPMSService.pushGuestProfile(data);
       pmsSyncSuccess = true;
-      pmsResponseData = { pmsAckId: `PMS-ACK-${Date.now()}`, status: 'RECEIVED' };
     } catch (err: any) {
       console.error('[PMS GATEWAY ERROR]', err);
       pmsSyncSuccess = false;

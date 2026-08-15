@@ -14,7 +14,7 @@ export default function FrontDeskDashboard() {
   const fetchRegistrations = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/pms-sync');
+      const res = await fetch('/api/sync/guest');
       if (res.ok) {
         const data = await res.json();
         setRegistrations(data.registrations || []);

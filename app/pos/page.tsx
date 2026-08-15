@@ -55,7 +55,7 @@ export default function POSDashboardPage() {
     setPostSuccess(null);
 
     try {
-      const res = await fetch('/api/pos/charge', {
+      const res = await fetch('/api/sync/folio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

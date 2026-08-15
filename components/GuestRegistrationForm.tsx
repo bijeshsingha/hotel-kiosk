@@ -95,7 +95,7 @@ export default function GuestRegistrationForm() {
   const onSubmit = async (data: GuestRegistrationFormData) => {
     setSubmitting(true);
     try {
-      const response = await fetch('/api/pms-sync', {
+      const response = await fetch('/api/sync/guest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
