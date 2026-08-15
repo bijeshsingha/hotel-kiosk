@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Camera, Upload, CheckCircle2, X } from 'lucide-react';
+import { Camera, Upload, CheckCircle2, X, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface IdUploadSectionProps {
@@ -9,6 +9,7 @@ interface IdUploadSectionProps {
 
 export default function IdUploadSection({ onImageCaptured, error }: IdUploadSectionProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const processImage = (file: File) => {
@@ -44,9 +45,8 @@ export default function IdUploadSection({ onImageCaptured, error }: IdUploadSect
   const handleRemove = () => {
     setImagePreview(null);
     onImageCaptured(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+    if (cameraInputRef.current) cameraInputRef.current.value = '';
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   return (
@@ -65,15 +65,26 @@ export default function IdUploadSection({ onImageCaptured, error }: IdUploadSect
             accept="image/*"
             capture="environment"
             className="hidden"
+            ref={cameraInputRef}
+            onChange={handleFileChange}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
             ref={fileInputRef}
             onChange={handleFileChange}
           />
+          
           <Camera className="w-10 h-10 text-gray-400 mb-3" />
           <h3 className="text-sm font-bold text-gray-700 mb-1">Upload or Capture ID</h3>
-          <p className="text-xs text-gray-500 mb-4 max-w-[250px]">Take a clear photo of your ID card using your mobile camera or upload an image.</p>
-          <div className="flex gap-3">
-            <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()}>
+          <p className="text-xs text-gray-500 mb-5 max-w-[250px]">Take a clear photo of your ID card using your mobile camera or upload an image.</p>
+          <div className="flex flex-col sm:flex-row gap-3 w-full justify-center max-w-[400px]">
+            <Button type="button" variant="outline" className="flex-1" onClick={() => cameraInputRef.current?.click()}>
               <Camera className="w-4 h-4 mr-2" /> Open Camera
+            </Button>
+            <Button type="button" variant="outline" className="flex-1" onClick={() => fileInputRef.current?.click()}>
+              <ImageIcon className="w-4 h-4 mr-2" /> Upload File
             </Button>
           </div>
         </div>
