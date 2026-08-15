@@ -228,3 +228,24 @@ export async function anonymizeRegistration(registrationId: string): Promise<boo
   writeLocalDb(records);
   return true;
 }
+
+export async function addFolioCharge(roomNumber: string, chargeDetails: string): Promise<any | null> {
+  const records = await getAllRegistrations();
+  // Find active registration for this room (not archived)
+  const activeRecord = records.find(r => r.roomNumber === roomNumber && r.syncStatus !== 'archived');
+  
+  if (!activeRecord) return null;
+
+  const currentExtraItems = activeRecord.extraItems ? activeRecord.extraItems.trim() : '';
+  const newExtraItems = currentExtraItems 
+    ? `${currentExtraItems}\n${chargeDetails}` 
+    : chargeDetails;
+
+  activeRecord.extraItems = newExtraItems;
+  activeRecord.updatedAt = new Date().toISOString();
+
+  await saveKvRecords(records);
+  writeLocalDb(records);
+
+  return activeRecord;
+}

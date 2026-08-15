@@ -4,8 +4,8 @@ import { ADMIN_COOKIE_NAME } from '@/lib/auth';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect /admin routes
-  if (pathname.startsWith('/admin')) {
+  // Protect /admin and /pos routes
+  if (pathname.startsWith('/admin') || pathname.startsWith('/pos')) {
     const sessionToken = request.cookies.get(ADMIN_COOKIE_NAME)?.value;
     const isAuthenticated = sessionToken === 'authenticated_staff_session';
 
@@ -20,5 +20,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/pos/:path*'],
 };
