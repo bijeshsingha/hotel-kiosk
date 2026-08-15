@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllRegistrations, addFolioCharge } from '@/lib/db';
+import { saveOrder } from '@/lib/ordersDb';
 import { MockPMSService } from '@/lib/pms-mock';
 import { CartItem } from '@/store/cartStore';
 
@@ -44,6 +45,13 @@ export async function POST(request: NextRequest) {
 
     // 4. Save locally
     await addFolioCharge(roomNumber, chargeString);
+
+    // 5. Save structured order for Kitchen Dashboard
+    await saveOrder({
+      roomNumber,
+      items,
+      totalPrice
+    });
 
     return NextResponse.json({
       success: true,

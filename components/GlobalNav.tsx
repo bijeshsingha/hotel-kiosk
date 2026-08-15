@@ -8,11 +8,17 @@ export function GlobalNav() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
+  // Hide entirely on Kiosk and Menu routes as requested by user
+  if (pathname.startsWith('/check-in') || pathname.startsWith('/menu')) {
+    return null;
+  }
+
   const links = [
     { name: 'Kiosk', href: '/check-in', icon: UserPlus },
     { name: 'Admin', href: '/admin', icon: LayoutDashboard },
     { name: 'POS', href: '/pos', icon: Coffee },
     { name: 'Menu', href: '/menu', icon: MenuSquare },
+    { name: 'KDS', href: '/admin/orders', icon: MenuSquare },
   ];
 
   return (
