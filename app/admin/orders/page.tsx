@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import type { OrderRecord } from '@/lib/ordersDb';
-import { ChefHat, Printer, CheckCircle2, Clock, PlayCircle } from 'lucide-react';
+import { ChefHat, Printer, CheckCircle2, Clock, PlayCircle, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function KitchenDashboard() {
@@ -73,11 +73,27 @@ export default function KitchenDashboard() {
     printWindow.document.close();
   };
 
+  const handleDragStart = (e: React.DragEvent, orderId: string) => {
+    e.dataTransfer.setData('orderId', orderId);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent, newStatus: OrderRecord['status']) => {
+    e.preventDefault();
+    const orderId = e.dataTransfer.getData('orderId');
+    if (orderId) {
+      updateStatus(orderId, newStatus);
+    }
+  };
+
   const columns = [
     { id: 'pending', title: 'Pending', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
     { id: 'preparing', title: 'Preparing', icon: PlayCircle, color: 'text-blue-600', bg: 'bg-blue-50' },
     { id: 'delivered', title: 'Delivered', icon: CheckCircle2, color: 'text-green-600', bg: 'bg-green-50' }
-  ];
+  ] as const;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -102,7 +118,12 @@ export default function KitchenDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {columns.map(col => (
-            <div key={col.id} className="bg-white rounded-2xl shadow-sm border border-gray-200 flex flex-col h-[75vh]">
+            <div 
+              key={col.id} 
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 flex flex-col h-[75vh]"
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, col.id)}
+            >
               <div className={`p-4 border-b border-gray-100 flex items-center gap-2 ${col.bg}`}>
                 <col.icon className={`w-5 h-5 ${col.color}`} />
                 <h2 className={`font-bold text-lg ${col.color}`}>{col.title}</h2>
@@ -113,7 +134,12 @@ export default function KitchenDashboard() {
               
               <div className="flex-1 p-4 overflow-y-auto flex flex-col gap-4 bg-gray-50/50">
                 {orders.filter(o => o.status === col.id).map(order => (
-                  <div key={order.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                  <div 
+                    key={order.id} 
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, order.id)}
+                    className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-grab active:cursor-grabbing"
+                  >
                     <div className="flex justify-between items-start mb-3">
                       <div>
                         <span className="inline-block px-2 py-1 bg-gray-900 text-white font-bold text-sm rounded-lg mb-2">
@@ -139,6 +165,17 @@ export default function KitchenDashboard() {
                     </div>
                     
                     <div className="flex gap-2">
+                      {order.status === 'preparing' && (
+                        <button onClick={() => updateStatus(order.id, 'pending')} className="flex-none p-2 bg-gray-100 text-gray-600 rounded-xl hover:bg-gray-200 transition-colors" title="Move back to Pending">
+                          <ArrowLeft className="w-5 h-5" />
+                        </button>
+                      )}
+                      {order.status === 'delivered' && (
+                        <button onClick={() => updateStatus(order.id, 'preparing')} className="flex-none p-2 bg-gray-100 text-gray-600 rounded-xl hover:bg-gray-200 transition-colors" title="Move back to Preparing">
+                          <ArrowLeft className="w-5 h-5" />
+                        </button>
+                      )}
+
                       {order.status === 'pending' && (
                         <button onClick={() => updateStatus(order.id, 'preparing')} className="flex-1 bg-blue-50 text-blue-700 font-bold py-2 rounded-xl text-sm hover:bg-blue-100 transition-colors">
                           Start Preparing
@@ -155,7 +192,7 @@ export default function KitchenDashboard() {
                 
                 {orders.filter(o => o.status === col.id).length === 0 && !loading && (
                   <div className="text-center text-gray-400 py-10 text-sm font-medium">
-                    No {col.title.toLowerCase()} orders
+                    Drag items here or <br/> No {col.title.toLowerCase()} orders
                   </div>
                 )}
               </div>
