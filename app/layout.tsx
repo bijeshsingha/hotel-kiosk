@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { GlobalNav } from '@/components/GlobalNav';
+import { GlobalNavWrapper } from '@/components/GlobalNavWrapper';
 
 export const metadata: Metadata = {
   title: 'Hotel Divine View | Digital Guest Registration Kiosk',
@@ -31,7 +31,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-screen selection:bg-amber-500/30 selection:text-amber-200">
         {children}
-        <GlobalNav />
+        <GlobalNavWrapper />
       </body>
     </html>
   );
