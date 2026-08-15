@@ -26,16 +26,7 @@ export default function CheckInKioskPage() {
             </div>
           </div>
           
-          <div className="inline-flex flex-col items-center mt-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs sm:text-sm font-bold uppercase tracking-wider font-body shadow-sm">
-              <Sparkles className="w-4 h-4" /> Guest Self-Service Kiosk
-            </div>
-            <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-text-muted font-body">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>Encrypted Local & PMS Gateway Session</span>
-            </div>
-          </div>
-        </header>
+          </header>
 
       {/* Guest Intake Kiosk Form */}
       <GuestRegistrationForm />
