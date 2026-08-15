@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
       foreignerDetails: data.foreignerDetails,
       termsAccepted: data.termsAccepted,
       signatureDataUrl: data.signatureDataUrl,
+      idImageUrl: data.idImageUrl,
     });
 
     console.log('\n=======================================================');

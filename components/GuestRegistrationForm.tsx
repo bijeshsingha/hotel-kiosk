@@ -8,6 +8,7 @@ import PrimaryGuestSection from './PrimaryGuestSection';
 import CoGuestsSection from './CoGuestsSection';
 import ForeignerSection from './ForeignerSection';
 import SignatureSection from './SignatureSection';
+import IdUploadSection from './IdUploadSection';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Send, CheckCircle, RefreshCw, AlertCircle } from 'lucide-react';
@@ -75,6 +76,7 @@ export default function GuestRegistrationForm() {
       },
       termsAccepted: true,
       signatureDataUrl: '',
+      idImageUrl: '',
     },
   });
 
@@ -163,6 +165,7 @@ export default function GuestRegistrationForm() {
       },
       termsAccepted: true,
       signatureDataUrl: '',
+      idImageUrl: '',
     });
     setSubmittedRegId(null);
     setPrimaryGuestName('');
@@ -224,6 +227,13 @@ export default function GuestRegistrationForm() {
 
       {/* Conditional Foreigner Section */}
       <ForeignerSection register={register} errors={errors} setValue={setValue} isForeigner={isForeigner} />
+
+
+      {/* ID Upload Section */}
+      <IdUploadSection 
+        onImageCaptured={(base64) => setValue('idImageUrl', base64 || '', { shouldValidate: true })} 
+        error={errors.idImageUrl?.message}
+      />
 
       {/* Signature & Terms Section */}
       <SignatureSection register={register} errors={errors} setValue={setValue} signatureDataUrl={signatureDataUrl} />

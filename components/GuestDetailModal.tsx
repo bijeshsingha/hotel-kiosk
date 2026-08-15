@@ -192,6 +192,14 @@ export default function GuestDetailModal({
             </div>
           </div>
 
+          {/* Government ID Image (no-print) */}
+          {record.idImageUrl && (
+            <div className="no-print bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
+              <h3 className="text-sm font-bold font-heading text-gray-900 mb-2">Government ID</h3>
+              <img src={record.idImageUrl} alt="Government ID" className="max-h-[300px] rounded border border-gray-300 bg-white object-contain" />
+            </div>
+          )}
+
           {/* Official Printable Header */}
           <div className="border-b-2 border-gray-900 pb-4 text-center">
             <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-gray-900 tracking-wider">

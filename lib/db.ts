@@ -15,6 +15,8 @@ export interface StoredGuestRecord {
   foreignerDetails: any;
   termsAccepted: boolean;
   signatureDataUrl: string;
+  idImageUrl?: string;
+  idImageUrl?: string;
   checkoutTime?: string;
   extraItems?: string;
 }
@@ -114,6 +116,7 @@ export async function saveLocalRegistration(payload: {
   foreignerDetails: any;
   termsAccepted: boolean;
   signatureDataUrl: string;
+  idImageUrl?: string;
 }): Promise<StoredGuestRecord> {
   const records = await getAllRegistrations();
   const timestamp = new Date().toISOString();
@@ -130,6 +133,7 @@ export async function saveLocalRegistration(payload: {
     foreignerDetails: payload.foreignerDetails || null,
     termsAccepted: payload.termsAccepted,
     signatureDataUrl: payload.signatureDataUrl,
+    idImageUrl: payload.idImageUrl,
   };
 
   records.unshift(newRecord);
